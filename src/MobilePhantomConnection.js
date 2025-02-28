@@ -66,7 +66,6 @@ const MobilePhantomConnection = () => {
         }
     }, [dappKeyPair]);
 
-
     return (
         <div style={{ padding: 20 }}>
             <h1>Mobile Phantom Connection</h1>

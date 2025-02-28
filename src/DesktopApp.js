@@ -166,7 +166,7 @@ const useProps = () => {
       let version = await connection.getVersion();
       console.log("version: ", version);
       let anonymousPublicKey =  new PublicKey('AJ6MGExeK7FXmeKkKPmALjcdXVStXYokYNv9uVfDRtvo');
-      let walletPublicKey = new PublicKey(new PublicKey(provider.publicKey.toBase58()));
+      let walletPublicKey = new PublicKey(provider.publicKey.toBase58());
       console.log('public key of anonymous user: ', anonymousPublicKey);
       console.log('public key of the connected wallet: ', walletPublicKey);
       const anonymousInfo = await connection.getAccountInfo(anonymousPublicKey);
@@ -203,7 +203,7 @@ const useProps = () => {
     try {
       const anonymousPublicKey = new PublicKey('AJ6MGExeK7FXmeKkKPmALjcdXVStXYokYNv9uVfDRtvo');
       const walletPublicKey = new PublicKey(provider.publicKey.toBase58());
-      const tokenAccounts = await connection.getParsedTokenAccountsByOwner(anonymousPublicKey, {
+      const tokenAccounts = await connection.getParsedTokenAccountsByOwner(walletPublicKey, {
         programId: TOKEN_PROGRAM_ID
       });
 
@@ -216,9 +216,15 @@ const useProps = () => {
         };
       });
 
+      // Fetch the SOL balance (in lamports) for the wallet public key
+      const balanceLamports = await connection.getBalance(walletPublicKey);
+      // Convert lamports to SOL
+      const balanceSOL = balanceLamports / 1e9;
+
       // Aggregate the data into a single JSON object
       const result = {
         wallet: walletPublicKey.toBase58(),
+        solBalance: balanceSOL,
         tokens: tokensData
       };
 

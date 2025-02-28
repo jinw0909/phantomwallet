@@ -8,7 +8,7 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<DesktopApp />} />
-            <Route path="/mobile" element={<MobilePhantomConnection />} />
+            <Route path="/mobile/*" element={<MobilePhantomConnection />} />
         </Routes>
     );
 }
