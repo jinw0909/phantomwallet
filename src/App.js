@@ -25,13 +25,14 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<DesktopApp />} />
-            <Route path="/mobile/*" element={<MobilePhantomConnection />} />
+            {/*<Route path="/mobile/*" element={<MobilePhantomConnection />} />*/}
             <Route path="/metamask/*" element={
                 <WagmiProvider config={config}>
                     <QueryClientProvider client={queryClient}>
                         <MetaMaskApp/>
                     </QueryClientProvider>
-                </WagmiProvider>}
+                </WagmiProvider>
+                }
             />
         </Routes>
     );
